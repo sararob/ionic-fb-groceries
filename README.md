@@ -2,7 +2,7 @@
 
 **This is the demo app from my [Getting started with Ionic](http://youtu.be/zj8ZFV9vv9k) screencast.**
 
-[Demo GIF](ionic.gif)
+![Demo GIF](ionic.gif)
 
 To run it in the browser, clone the repo and run the command `ionic serve --lab` to view it with a side by side iOS and Android view. If you're new to Ionic and Firebase, check out these resources to get started:
 
