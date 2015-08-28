@@ -10,7 +10,7 @@ angular.module('starter', ['ionic', 'firebase'])
   return $firebaseArray(itemsRef);
 }])
 
-.controller('ListCtrl', ['$scope', '$ionicListDelegate', '$ionicPopup', '$timeout', 'Items', function($scope, $ionicListDelegate, $ionicPopup, $timeout, Items) {
+.controller('ListCtrl', ['$scope', '$ionicListDelegate', '$ionicPopup', 'Items', function($scope, $ionicListDelegate, Items) {
 
   $scope.items = Items;
 
