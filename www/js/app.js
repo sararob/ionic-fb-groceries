@@ -10,17 +10,19 @@ angular.module('starter', ['ionic', 'firebase'])
   return $firebaseArray(itemsRef);
 }])
 
-.controller('ListCtrl', function($scope, $ionicListDelegate, Items) {
+.controller('ListCtrl', ['$scope', '$ionicListDelegate', '$ionicPopup', 'Items', function($scope, $ionicListDelegate, Items) {
 
   $scope.items = Items;
 
   $scope.addItem = function() {
-    var name = prompt('What do you need to buy?');
-    if (name) {
-      $scope.items.$add({
-        'name': name
-      });
-    }
+    var itemName = $scope.getItemFromPopup().then(function(name){
+      if (name) {
+        console.log(name);
+        $scope.items.$add({
+          'name': $scope.data.newItem
+        });
+      }
+    });
   };
 
   $scope.purchaseItem = function(item) {
@@ -28,4 +30,25 @@ angular.module('starter', ['ionic', 'firebase'])
     itemRef.child('status').set('purchased');
     $ionicListDelegate.closeOptionButtons();
   };
-});
+
+  $scope.getItemFromPopup = function() {
+    $scope.data = {};
+    return $ionicPopup.show({
+      template: '<input type="text" ng-model="data.newItem">',
+      title: 'What do you need to buy?',
+      subTitle: 'Enter the name of an item',
+      scope: $scope,
+      buttons: [
+        { text: 'Cancel' },
+        {
+          text: '<b>Save</b>',
+          type: 'button-positive',
+          onTap: function(e) {
+            return $scope.data.newItem;
+          }
+        }
+      ]
+    });
+  };
+
+}]);
